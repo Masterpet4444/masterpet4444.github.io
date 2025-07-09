@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  </head>
+  <body>
+ <button type="button" class="btn btn-primary" id="stext">Send Text</button>
+    <button type="button" class="btn btn-success" id="pic">Success</button>
+    <button type="button" class="btn btn-danger" id="ff">Share</button>
+    
+    
+    
+    
+    
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+ 
+    
+  <script>
+    window.onload = function(e){
+      liff.init({liffId: "1661449942-XvYKwYAR"},function(){
+        if(liff.isLoggedIn()){
+          const stext = document.getElementById("stext");
+          const x = document.getElementById("pic");
+          const y = document.getElementById("ff");
+          
+               y.onclick = () => {
+            const flex = [{
+  "type": "flex",
+  "altText": "ส่งรูป",
+  "contents": {
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "image",
+          "url": "https://i.ibb.co/zV520QYJ/image.jpg",
+          "size": "full",
+          "aspectMode": "cover",
+          "aspectRatio": "1:1",
+          "gravity": "center",
+          "action": {
+            "type": "uri",
+            "label": "action",
+            "uri": "http://citly.co/25d0345b"
+          }
+        }
+      ],
+      "paddingAll": "0px"
+    }
+  }
+}]
+            shareflex(flex)
+          }
+          
+          
+          //---------
+        x.onclick = () => {
+            const flex = [{
+  "type": "image",
+  "originalContentUrl": "https://cdn.pixabay.com/photo/2014/09/07/22/34/car-race-438467_640.jpg",
+  "previewImageUrl": "https://cdn.pixabay.com/photo/2014/09/07/22/34/car-race-438467_640.jpg"
+}]
+            shareflex(flex)
+          }
+          
+          
+          //-----------
+          stext.onclick = () => {
+            const flex = [{
+    "type": "text",
+    "text": "Hello, world"
+}
+]
+            sendflex(flex)
+          }
+          //---------
+          
+        }else {
+          liff.login()
+        }
+      })
+    }
+    
+    function sendflex(flex){
+      liff.sendMessages(flex).then(function(){
+        liff.closeWindow();
+      })
+    }
+    
+    function shareflex(flex){
+      liff.shareTargetPicker(flex).then(function (res) {
+    if (res) {
+      liff.closeWindow();
+    } else {
+      // sending message canceled
+      console.log("TargetPicker was closed!");
+    }
+  })
+  .catch(function (error) {
+    // something went wrong before sending a message
+    console.log("something wrong happen");
+  });
+    }
+    </script>
+  </body>
+</html>
