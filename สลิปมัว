@@ -17,7 +17,7 @@
     
   <script>
     window.onload = function(e){
-      liff.init({liffId: "1661449942-roD4wDXB"},function(){
+      liff.init({liffId: "1661449942-OvRexRWG"},function(){
         if(liff.isLoggedIn()){
         var params = (new URL(document.location)).searchParams;
           var key = params.get('pet');
