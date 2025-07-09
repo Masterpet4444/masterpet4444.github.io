@@ -7,6 +7,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
   <body>
+ <button type="button" class="btn btn-primary" id="stext">Send Text</button>
+    <button type="button" class="btn btn-success" id="pic">Success</button>
+    <button type="button" class="btn btn-danger" id="ff">Share</button>
+    
     
     
     
@@ -19,11 +23,11 @@
     window.onload = function(e){
       liff.init({liffId: "1661449942-OvRexRWG"},function(){
         if(liff.isLoggedIn()){
-        var params = (new URL(document.location)).searchParams;
-          var key = params.get('pet');
+          const stext = document.getElementById("stext");
+          const x = document.getElementById("pic");
+          const y = document.getElementById("ff");
           
-          
-           if(key == "flex"){
+               y.onclick = () => {
             const flex = [{
   "type": "flex",
   "altText": "Flex Message",
@@ -54,27 +58,29 @@
             shareflex(flex)
           }
           
-          //----------
-           if(key == "img"){
-            const flex = [{
-  "type": "image",
-  "originalContentUrl": "https://cdn.pixabay.com/photo/2023/06/03/17/11/giraffe-8038107__340.jpg",
-  "previewImageUrl": "https://cdn.pixabay.com/photo/2023/06/03/17/11/giraffe-8038107__340.jpg"
-}]
-            sendflex(flex)
-          }
           
           //---------
-          if(key == "text"){
+        x.onclick = () => {
+            const flex = [{
+  "type": "image",
+  "originalContentUrl": "https://cdn.pixabay.com/photo/2014/09/07/22/34/car-race-438467_640.jpg",
+  "previewImageUrl": "https://cdn.pixabay.com/photo/2014/09/07/22/34/car-race-438467_640.jpg"
+}]
+            shareflex(flex)
+          }
+          
+          
+          //-----------
+          stext.onclick = () => {
             const flex = [{
     "type": "text",
-    "text": "Hello, world test"
+    "text": "Hello, world"
 }
 ]
             sendflex(flex)
           }
-        //----------
-        
+          //---------
+          
         }else {
           liff.login()
         }
